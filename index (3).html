@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luan &amp; Renata — 13.11.2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;1,400&family=Cinzel:wght@400;500&family=Pinyon+Script&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FBF8F1;        /* fundo branco quente */
+    --warm-white: #F3ECDD;   /* fundo alternativo / envelope */
+    --gold: #C2A14B;         /* DOURADO — ornamentos e destaques */
+    --gold-light: #E1CE97;   /* dourado suave — fios e bordas */
+    --gold-dark: #16243F;    /* AZUL MARINHO — cor principal */
+    --navy: #16243F;
+    --navy-soft: #2A3B5C;
+    --rosa: #C2A14B;          /* dourado (reaproveitado) */
+    --rosa-dark: #A9863B;     /* dourado escuro — nomes em itálico */
+    --laranja: #C2A14B;       /* toque dourado */
+    --rosa-profundo: #1B2A4A; /* splash: nomes manuscritos (marinho) */
+    --centro: #C9A14B;        /* centro das flores */
+    --centro-int: #9A7C2E;
+    --text: #1E2A3F;
+    --text-mid: #3C4A63;
+    --text-light: #8A8675;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    font-family: 'EB Garamond', Georgia, serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* SPLASH (manuscrito + flores) */
+  #splash {
+    position: fixed; inset: 0; z-index: 1000;
+    background: radial-gradient(120% 90% at 50% 18%, #FFFFFF 0%, var(--cream) 55%, #F4ECDC 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 40px 28px; cursor: pointer; overflow: hidden;
+    transition: opacity 1.1s ease, transform 1.1s ease;
+  }
+  #splash.hide { opacity: 0; transform: scale(1.06); pointer-events: none; }
+  #splash .sp-rotulo { margin-bottom: 26px; opacity: 0; animation: fadeUp 1s ease .2s forwards; }
+  #splash .sp-nomes { font-size: 4.6rem; opacity: 0; animation: fadeUp 1.1s ease .5s forwards; position: relative; z-index: 1; }
+  #splash .sp-data { margin-top: 8px; opacity: 0; animation: fadeUp 1.1s ease .8s forwards; }
+  #splash .sp-toque {
+    margin-top: 54px; opacity: 0;
+    animation: fadeUp 1.1s ease 1.2s forwards, pulsa 2.6s ease-in-out 2.4s infinite;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  #splash .sp-toque .anel {
+    width: 54px; height: 54px; border-radius: 50%; border: 1px solid var(--gold);
+    display: flex; align-items: center; justify-content: center; color: var(--navy);
+  }
+  #splash .sp-toque .anel svg { width: 22px; height: 22px; }
+  @keyframes pulsa { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+
+  /* tipografia do splash */
+  .nomes { font-family: 'Pinyon Script', cursive; color: var(--rosa-profundo); line-height: .95; font-weight: 400; }
+  .rotulo {
+    font-family: 'Jost', sans-serif; font-weight: 400; letter-spacing: .42em;
+    text-transform: uppercase; font-size: .66rem; color: var(--text-light);
+  }
+
+  /* flores decorativas (somente no splash) */
+  .deco { position: absolute; pointer-events: none; z-index: 0; line-height: 0; }
+  .deco svg { width: 100%; height: auto; display: block; }
+  .flor-petalas ellipse { fill: currentColor; }
+  .flor-petalas-int ellipse { fill: currentColor; opacity: .5; }
+  .flor-centro { fill: var(--centro); }
+  .flor-centro-int { fill: var(--centro-int); }
+  .ramo-svg { color: #B49A57; }
+  .flor-rosa { color: #CBA94E; }
+  .flor-rosa-prof { color: #1B2A4A; }
+  .flor-laranja { color: #2A3B5C; }
+  .flor-verde { color: #B49A57; }
+
+  /* MAIN */
+  #invite { display: none; min-height: 100vh; }
+  #invite.visible { display: block; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative; padding: 60px 24px;
+    background: var(--cream); overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(22,36,63,0.10) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 100%, rgba(194,161,75,0.10) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .corner { position: absolute; width: 80px; height: 80px; opacity: 0.55; }
+  .corner-tl { top: 20px; left: 20px; }
+  .corner-tr { top: 20px; right: 20px; transform: scaleX(-1); }
+  .corner-bl { bottom: 20px; left: 20px; transform: scaleY(-1); }
+  .corner-br { bottom: 20px; right: 20px; transform: scale(-1); }
+
+  .hero-inner {
+    text-align: center; position: relative; z-index: 1;
+    opacity: 0; transform: translateY(20px);
+    animation: fadeUp 1.2s ease forwards 0.3s;
+  }
+  @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
+    letter-spacing: 5px; text-transform: uppercase; color: var(--text-mid);
+    margin-bottom: 20px; display: block;
+    opacity: 0; animation: fadeUp 1s ease forwards 0.6s;
+  }
+
+  .divider-ornament {
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px; margin: 16px 0;
+    opacity: 0; animation: fadeUp 1s ease forwards 0.8s;
+  }
+  .divider-ornament::before,
+  .divider-ornament::after {
+    content: ''; width: 60px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold));
+  }
+  .divider-ornament::after { background: linear-gradient(to left, transparent, var(--gold)); }
+  .diamond { width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+
+  .names {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(52px, 14vw, 88px); font-weight: 400; line-height: 1;
+    color: var(--text); letter-spacing: -1px;
+    opacity: 0; animation: fadeUp 1.2s ease forwards 1s;
+  }
+  .names em { font-style: italic; color: var(--rosa-dark); }
+  .ampersand {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic; color: var(--gold); font-size: 0.8em; display: block; line-height: 0.9;
+  }
+
+  .hero-date {
+    font-family: 'Cinzel', Georgia, serif; font-size: 14px;
+    letter-spacing: 4px; color: var(--text-mid); margin-top: 24px;
+    opacity: 0; animation: fadeUp 1s ease forwards 1.2s;
+  }
+
+  .scroll-hint {
+  position: absolute; bottom: 28px; left: 0; right: 0;
+  margin-inline: auto; width: max-content;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeUp 1s ease forwards 2s;
+}
+  .scroll-hint span {
+    font-family: 'Cinzel', Georgia, serif; font-size: 9px;
+    letter-spacing: 3px; color: var(--text-mid); text-transform: uppercase;
+  }
+  .scroll-arrow {
+    width: 1px; height: 36px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+  /* MÚSICA */
+  .music-section {
+    background: var(--navy);
+    padding: 28px 24px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px; flex-wrap: wrap;
+  }
+  .music-label {
+    font-family: 'Cinzel', Georgia, serif; font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.75);
+  }
+  .music-player { display: flex; align-items: center; gap: 12px; }
+  .music-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px; font-style: italic; color: white;
+  }
+  .music-title small {
+    display: block; font-family: 'Cinzel', Georgia, serif; font-style: normal;
+    font-size: 8px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--gold-light); margin-top: 3px;
+  }
+  .play-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,0.16); border: 1.5px solid rgba(225,206,151,0.6);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+  }
+  .play-btn:hover { background: rgba(255,255,255,0.3); }
+  .play-btn .ic-pause { display: none; }
+  .play-btn.playing .ic-play { display: none; }
+  .play-btn.playing .ic-pause { display: block; }
+
+  /* SECTIONS */
+  section { padding: 80px 24px; max-width: 600px; margin: 0 auto; text-align: center; }
+
+  .section-label {
+    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
+    letter-spacing: 5px; text-transform: uppercase; color: var(--navy);
+    margin-bottom: 32px; display: block; font-weight: 500;
+  }
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 16px; }
+  .timeline-item {
+    display: grid; grid-template-columns: 1fr 44px 1fr;
+    align-items: start; gap: 16px; padding: 20px 0;
+    position: relative; opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .timeline-item.visible { opacity: 1; transform: translateY(0); }
+  .timeline-item:not(:last-child)::after {
+    content: ''; position: absolute; left: 50%; top: 54px;
+    width: 1px; height: calc(100% - 24px);
+    background: linear-gradient(to bottom, var(--gold-light), transparent);
+    transform: translateX(-50%);
+  }
+  .timeline-dot {
+    width: 44px; height: 44px; background: white;
+    border: 1.5px solid var(--gold-light); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; box-shadow: 0 2px 8px rgba(22,36,63,0.12);
+  }
+  .timeline-left { text-align: right; padding-top: 8px; }
+  .timeline-right { text-align: left; padding-top: 8px; }
+  .timeline-time {
+    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
+    letter-spacing: 2px; color: var(--navy); display: block; margin-bottom: 4px; font-weight: 500;
+  }
+  .timeline-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px; font-style: italic; color: var(--text); display: block; font-weight: 500;
+  }
+  .timeline-sub { font-size: 13px; color: var(--text-light); display: block; margin-top: 3px; line-height: 1.5; }
+
+  /* INFO CARDS */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 16px; }
+  .info-card {
+    border: 1.5px solid var(--gold-light); padding: 24px 16px;
+    background: white; position: relative;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .info-card.visible { opacity: 1; transform: translateY(0); }
+  .info-card::before {
+    content: ''; position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid rgba(194,161,75,0.30); pointer-events: none;
+  }
+  .info-card-icon { display: block; margin: 0 auto 10px; }
+  .info-card-label {
+    font-family: 'Cinzel', Georgia, serif; font-size: 9px;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--navy);
+    display: block; margin-bottom: 6px; font-weight: 500;
+  }
+  .info-card-value {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 17px; color: var(--text); font-style: italic; font-weight: 500; line-height: 1.4;
+  }
+
+  /* LOCAIS */
+  .venue-stack { display: flex; flex-direction: column; gap: 16px; margin-top: 16px; }
+  .venue-card {
+    border: 1.5px solid var(--gold-light); padding: 28px 22px;
+    background: white; position: relative;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .venue-card.visible { opacity: 1; transform: translateY(0); }
+  .venue-card::before {
+    content: ''; position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid rgba(194,161,75,0.25); pointer-events: none;
+  }
+  .venue-card svg { display: block; margin: 0 auto 12px; }
+  .venue-label {
+    font-family: 'Cinzel', Georgia, serif; font-size: 9px;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--navy);
+    display: block; margin-bottom: 8px; font-weight: 500;
+  }
+  .venue-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px; font-style: italic; color: var(--text); display: block; margin-bottom: 6px;
+  }
+  .venue-address { font-size: 14px; color: var(--text-mid); line-height: 1.6; display: block; margin-bottom: 16px; }
+  .venue-map {
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    font-family: 'Cinzel', Georgia, serif; font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--navy); text-decoration: none;
+    border: 1.5px solid var(--navy); padding: 9px 20px; transition: all 0.25s ease;
+  }
+  .venue-map:hover { background: var(--navy); color: white; }
+
+  /* DRESS CODE */
+  .dress-section { background: white; border: 1.5px solid var(--gold-light); padding: 40px 24px; margin-top: 16px; }
+  .dress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 24px; }
+  .dress-item { text-align: center; }
+  .dress-item svg { display: block; margin: 0 auto 12px; }
+  .dress-item-label {
+    font-family: 'Cinzel', Georgia, serif; font-size: 10px;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--navy); font-weight: 500;
+    display: block; margin-bottom: 6px;
+  }
+  .dress-item-desc { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 16px; font-style: italic; color: var(--text-mid); }
+  .dress-note {
+    font-family: 'Cinzel', Georgia, serif; font-size: 9px;
+    letter-spacing: 2px; color: var(--text-light); text-transform: uppercase;
+    margin-top: 24px; display: block; line-height: 1.7;
+  }
+
+  /* COUNTDOWN */
+  .countdown-wrap {
+    margin-top: 8px; opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .countdown-wrap.visible { opacity: 1; transform: translateY(0); }
+  .countdown-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .countdown-box { background: white; border: 1.5px solid var(--gold-light); padding: 20px 8px 14px; }
+  .countdown-num {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 40px; font-weight: 400; color: var(--text); line-height: 1; display: block;
+  }
+  .countdown-label {
+    font-family: 'Cinzel', Georgia, serif; font-size: 8px;
+    letter-spacing: 2px; color: var(--navy); text-transform: uppercase; display: block; margin-top: 6px; font-weight: 500;
+  }
+
+  /* MESSAGE */
+  .message-box {
+    border-top: 1.5px solid var(--gold-light); border-bottom: 1.5px solid var(--gold-light);
+    padding: 44px 24px; margin-top: 16px; position: relative;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .message-box.visible { opacity: 1; transform: translateY(0); }
+  .message-box::before, .message-box::after {
+    content: '\2766'; position: absolute; font-size: 20px; color: var(--gold);
+  }
+  .message-box::before { top: -12px; left: 50%; transform: translateX(-50%); background: var(--cream); padding: 0 8px; }
+  .message-box::after { bottom: -12px; left: 50%; transform: translateX(-50%); background: var(--cream); padding: 0 8px; }
+  .message-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 22px; font-style: italic; color: var(--text-mid); line-height: 1.7; font-weight: 400;
+  }
+  .message-ref {
+    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; color: var(--navy);
+    margin-top: 22px; display: block; font-weight: 500;
+  }
+
+  /* LISTA DE PRESENTES */
+  .gift-box {
+    border: 1.5px solid var(--gold-light); padding: 40px 24px;
+    background: white; position: relative; margin-top: 16px;
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .gift-box.visible { opacity: 1; transform: translateY(0); }
+  .gift-box::before {
+    content: ''; position: absolute;
+    top: 4px; left: 4px; right: 4px; bottom: 4px;
+    border: 1px solid rgba(194,161,75,0.25); pointer-events: none;
+  }
+  .gift-text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px; font-style: italic; color: var(--text-mid); line-height: 1.7; margin: 16px 0;
+  }
+  .gift-note {
+    font-family: 'Cinzel', Georgia, serif; font-size: 9px;
+    letter-spacing: 3px; color: var(--navy); text-transform: uppercase; line-height: 1.8;
+  }
+
+  /* RSVP */
+  .rsvp-section { padding-bottom: 100px; }
+  .rsvp-intro {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 19px; font-style: italic; color: var(--text-mid);
+    margin-bottom: 32px; line-height: 1.7; font-weight: 400;
+  }
+  .rsvp-intro strong { font-style: normal; color: var(--text); font-weight: 600; }
+  .rsvp-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--navy); color: white; border: none;
+    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; padding: 14px 36px;
+    cursor: pointer; transition: all 0.3s ease; font-weight: 500;
+  }
+  .btn-primary:hover { background: var(--text); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+  .btn-secondary {
+    background: transparent; color: var(--navy);
+    border: 1.5px solid var(--navy);
+    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; padding: 14px 36px;
+    cursor: pointer; transition: all 0.3s ease; font-weight: 500;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .btn-secondary:hover { border-color: var(--text); color: var(--text); }
+
+  /* MODAL */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px); z-index: 200;
+    display: flex; align-items: center; justify-content: center; padding: 24px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: var(--cream); max-width: 420px; width: 100%; padding: 48px 36px;
+    position: relative; transform: translateY(20px); transition: transform 0.3s ease;
+    border: 1.5px solid var(--gold-light);
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 16px; right: 16px; background: none; border: none;
+    font-size: 18px; color: var(--text-light); cursor: pointer; font-weight: 600;
+  }
+  .modal h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 28px; font-style: italic; font-weight: 400; color: var(--text); margin-bottom: 8px;
+  }
+  .modal p { font-size: 15px; color: var(--text-light); margin-bottom: 28px; line-height: 1.6; }
+  .field-group { margin-bottom: 16px; text-align: left; }
+  .field-group label {
+    font-family: 'Cinzel', Georgia, serif; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--navy); display: block; margin-bottom: 6px; font-weight: 500;
+  }
+  .field-group input {
+    width: 100%; border: 1.5px solid var(--gold-light); padding: 12px 14px;
+    font-family: 'EB Garamond', Georgia, serif; font-size: 16px;
+    color: var(--text); background: white; outline: none; transition: border-color 0.2s; text-align: center;
+  }
+  .field-group input:focus { border-color: var(--navy); }
+
+  .rsvp-error {
+    display: none; margin-top: 18px; padding: 14px 16px;
+    background: rgba(22,36,63,0.08); border: 1px solid rgba(22,36,63,0.30);
+    font-family: 'EB Garamond', Georgia, serif; font-size: 15px; color: var(--navy); line-height: 1.5;
+  }
+  .rsvp-error strong { font-weight: 600; }
+
+  .rsvp-success { display: none; text-align: center; padding: 8px 0; }
+  .rsvp-success h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 26px; font-style: italic; color: var(--navy); margin: 12px 0 6px;
+  }
+  .rsvp-success p { color: var(--text-light); margin-bottom: 22px; }
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+    background: var(--navy); color: white; text-decoration: none;
+    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
+    letter-spacing: 3px; text-transform: uppercase; padding: 16px 20px;
+    transition: all 0.3s ease;
+  }
+  .btn-whatsapp:hover { background: var(--text); }
+  .reset-link {
+    display: inline-block; margin-top: 18px; cursor: pointer;
+    font-family: 'Cinzel', Georgia, serif; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--text-light); border-bottom: 1px solid var(--gold-light); padding-bottom: 3px;
+  }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 40px 24px; border-top: 1.5px solid var(--gold-light); }
+  footer .footer-names {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 26px; font-style: italic; color: var(--navy); display: block; margin-bottom: 8px; font-weight: 500;
+  }
+  footer .footer-date { font-family: 'Cinzel', Georgia, serif; font-size: 11px; letter-spacing: 4px; color: var(--text-mid); }
+
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ÁUDIO: subir o arquivo "diga-sim-pra-mim.mp3" junto do index.html, na mesma pasta -->
+<audio id="bgAudio" src="diga-sim-pra-mim.mp3" preload="auto" loop playsinline></audio>
+
+<!-- SPLASH -->
+<div id="splash" onclick="openInvite()">
+  <span class="deco flor-rosa" data-flor="gerbera" style="width:90px;top:8%;left:-22px;opacity:.16;transform:rotate(-18deg)"></span>
+  <span class="deco flor-laranja" data-flor="blossom" style="width:64px;top:14%;right:6px;opacity:.18;transform:rotate(22deg)"></span>
+  <span class="deco flor-verde" data-flor="ramo" style="width:120px;bottom:2%;left:-10px;opacity:.18;transform:rotate(8deg)"></span>
+  <span class="deco flor-rosa-prof" data-flor="blossom" style="width:54px;bottom:14%;right:-8px;opacity:.16;transform:rotate(-14deg)"></span>
+
+  <div class="sp-rotulo rotulo">Um convite especial</div>
+  <div class="sp-nomes nomes">Luan &amp; Renata</div>
+  <div class="sp-data rotulo">13 · 11 · 2026</div>
+  <div class="sp-toque">
+    <span class="anel">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <span class="rotulo" style="letter-spacing:.3em">toque para abrir</span>
+  </div>
+</div>
+
+<!-- INVITE -->
+<div id="invite">
+
+  <!-- HERO -->
+  <div class="hero">
+    <svg class="corner corner-tl" viewBox="0 0 80 80" fill="none"><path d="M2 2 L2 40 M2 2 L40 2" stroke="#C2A14B" stroke-width="1.5"/><circle cx="2" cy="2" r="2.5" fill="#C2A14B"/></svg>
+    <svg class="corner corner-tr" viewBox="0 0 80 80" fill="none"><path d="M2 2 L2 40 M2 2 L40 2" stroke="#C2A14B" stroke-width="1.5"/><circle cx="2" cy="2" r="2.5" fill="#C2A14B"/></svg>
+    <svg class="corner corner-bl" viewBox="0 0 80 80" fill="none"><path d="M2 2 L2 40 M2 2 L40 2" stroke="#C2A14B" stroke-width="1.5"/><circle cx="2" cy="2" r="2.5" fill="#C2A14B"/></svg>
+    <svg class="corner corner-br" viewBox="0 0 80 80" fill="none"><path d="M2 2 L2 40 M2 2 L40 2" stroke="#C2A14B" stroke-width="1.5"/><circle cx="2" cy="2" r="2.5" fill="#C2A14B"/></svg>
+
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Convidam para o seu casamento</span>
+      <div class="divider-ornament"><div class="diamond"></div></div>
+      <div class="names">
+        <em>Luan</em>
+        <span class="ampersand">&amp;</span>
+        <em>Renata</em>
+      </div>
+      <div class="divider-ornament" style="margin-top:20px;"><div class="diamond"></div></div>
+      <p class="hero-date">13 · 11 · 2026</p>
+    </div>
+    <div class="scroll-hint">
+      <span>Rolar</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </div>
+
+  <!-- MÚSICA -->
+  <div class="music-section">
+    <span class="music-label">Nossa Música</span>
+    <div class="music-player">
+      <button class="play-btn playing" id="playBtn" onclick="toggleMusic()">
+        <svg class="ic-play" width="14" height="16" viewBox="0 0 14 16" fill="white"><path d="M0 0 L14 8 L0 16 Z"/></svg>
+        <svg class="ic-pause" width="14" height="16" viewBox="0 0 14 16" fill="white"><rect x="1" y="1" width="4" height="14"/><rect x="9" y="1" width="4" height="14"/></svg>
+      </button>
+      <span class="music-title">Diga Sim Pra Mim<small>Dueto Enamorados</small></span>
+    </div>
+  </div>
+
+  <!-- MESSAGE -->
+  <section>
+    <span class="section-label reveal">A Bênção</span>
+    <div class="message-box reveal">
+      <p class="message-text">
+        "Para que todos vejam e saibam, reflitam e aprendam, que a mão do Senhor fez isso."
+      </p>
+      <span class="message-ref">Isaías 41:20</span>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section style="padding-top: 0;">
+    <span class="section-label reveal">O grande dia</span>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <span class="timeline-time">16:30</span>
+          <span class="timeline-title">Chegada</span>
+          <span class="timeline-sub">Recepção dos convidados na capela</span>
+        </div>
+        <div class="timeline-dot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div class="timeline-right"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left"></div>
+        <div class="timeline-dot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M10 4h4"/><path d="M5 10l7-4 7 4v10H5z"/><rect x="9" y="14" width="6" height="6"/></svg>
+        </div>
+        <div class="timeline-right">
+          <span class="timeline-time">17:00</span>
+          <span class="timeline-title">Cerimônia</span>
+          <span class="timeline-sub">Capela Santa Edwiges</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left">
+          <span class="timeline-time">18:30</span>
+          <span class="timeline-title">Recepção</span>
+          <span class="timeline-sub">Buffet Rosas Maraponga</span>
+        </div>
+        <div class="timeline-dot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2l1.4 7a3.5 3.5 0 0 0 7.2 0L18 2"/><path d="M9 22h6M12 12.5V22"/></svg>
+        </div>
+        <div class="timeline-right"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-left"></div>
+        <div class="timeline-dot">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 2v8a2 2 0 0 0 4 0V2M7 10v12"/><path d="M17 2c-1.6 1.4-2 3-2 5s.5 3.5 2 4.2V22"/></svg>
+        </div>
+        <div class="timeline-right">
+          <span class="timeline-time">20:00</span>
+          <span class="timeline-title">Jantar</span>
+          <span class="timeline-sub">No Buffet Rosas Maraponga</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO -->
+  <section style="padding-top: 0;">
+    <span class="section-label reveal">Informações</span>
+    <div class="info-grid">
+      <div class="info-card">
+        <svg class="info-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <span class="info-card-label">Data</span>
+        <span class="info-card-value">13 de novembro<br>de 2026</span>
+      </div>
+      <div class="info-card">
+        <svg class="info-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="info-card-label">Horário</span>
+        <span class="info-card-value">Cerimônia às<br>17h00</span>
+      </div>
+      <div class="info-card">
+        <svg class="info-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        <span class="info-card-label">Cidade</span>
+        <span class="info-card-value">Maraponga<br>Fortaleza · CE</span>
+      </div>
+      <div class="info-card">
+        <svg class="info-card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l6-4v8z"/><path d="M21 12l-6-4v8z"/><circle cx="12" cy="12" r="2"/></svg>
+        <span class="info-card-label">Traje</span>
+        <span class="info-card-value">Social Fino</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCAIS -->
+  <section style="padding-top: 0;">
+    <span class="section-label reveal">Onde será</span>
+    <div class="venue-stack">
+      <div class="venue-card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M10 4h4"/><path d="M4 11l8-5 8 5v10H4z"/><path d="M10 21v-5h4v5"/></svg>
+        <span class="venue-label">Cerimônia</span>
+        <span class="venue-name">Capela Santa Edwiges</span>
+        <span class="venue-address">Rua Cabral Veras, 494<br>Maraponga · Fortaleza · CE</span>
+        <a class="venue-map" href="https://www.google.com/maps/search/?api=1&query=Capela+Santa+Edwiges+Rua+Cabral+Veras+494+Maraponga+Fortaleza+CE" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Ver no mapa
+        </a>
+      </div>
+      <div class="venue-card">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 2l1.4 7a3.5 3.5 0 0 0 7.2 0L18 2"/><path d="M9 22h6M12 12.5V22"/></svg>
+        <span class="venue-label">Recepção</span>
+        <span class="venue-name">Buffet Rosas Maraponga</span>
+        <span class="venue-address">Rua Bibio Frota, 591<br>Maraponga · Fortaleza · CE</span>
+        <a class="venue-map" href="https://www.google.com/maps/search/?api=1&query=Buffet+Rosas+Maraponga+Rua+Bibio+Frota+591+Maraponga+Fortaleza+CE" target="_blank" rel="noopener">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          Ver no mapa
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DRESS CODE -->
+  <section style="padding-top: 0;">
+    <span class="section-label reveal">Dress Code</span>
+    <div class="dress-section reveal">
+      <div class="dress-grid">
+        <div class="dress-item">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 2 Q12 6 16 2 L18 8 L15 8 L15 22 L9 22 L9 8 L6 8 Z"/>
+            <path d="M9 8 Q12 11 15 8"/>
+          </svg>
+          <span class="dress-item-label">Ela</span>
+          <span class="dress-item-desc">Traje social fino</span>
+        </div>
+        <div class="dress-item">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="7" y="2" width="10" height="6" rx="1"/>
+            <path d="M7 5 L4 8 L4 22 L20 22 L20 8 L17 5"/>
+            <path d="M7 8 L7 22 M17 8 L17 22"/>
+            <path d="M11 2 L11 8 M13 2 L13 8"/>
+          </svg>
+          <span class="dress-item-label">Ele</span>
+          <span class="dress-item-desc">Traje social fino</span>
+        </div>
+      </div>
+      <span class="dress-note">
+        Pedimos gentilmente que evitem o branco, reservado à noiva
+      </span>
+    </div>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section style="padding-top: 0;">
+    <span class="section-label reveal">Contagem regressiva</span>
+    <div class="countdown-wrap">
+      <div class="countdown-grid">
+        <div class="countdown-box"><span class="countdown-num" id="days">--</span><span class="countdown-label">Dias</span></div>
+        <div class="countdown-box"><span class="countdown-num" id="hours">--</span><span class="countdown-label">Horas</span></div>
+        <div class="countdown-box"><span class="countdown-num" id="minutes">--</span><span class="countdown-label">Min</span></div>
+        <div class="countdown-box"><span class="countdown-num" id="seconds">--</span><span class="countdown-label">Seg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LISTA DE PRESENTES -->
+  <section style="padding-top: 0;">
+    <span class="section-label reveal">Lista de Presentes</span>
+    <div class="gift-box reveal">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto">
+        <path d="M20 12v10H4V12"/><path d="M22 7H2v5h20V7z"/><path d="M12 22V7"/>
+        <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+        <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>
+      </svg>
+      <p class="gift-text">
+        Sua presença já é o nosso maior presente.<br>
+        Mas, se desejar nos presentear,<br>preparamos a nossa lista com muito carinho.
+      </p>
+      <!-- TROCAR o href "#" pelo link da lista de presentes assim que a Luana enviar -->
+      <a class="btn-primary" href="#" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none;margin-top:8px;">Ver Lista de Presentes</a>
+      <span class="gift-note" style="display:block;margin-top:18px;">Com amor, Luan &amp; Renata</span>
+    </div>
+  </section>
+
+  <!-- RSVP -->
+  <section class="rsvp-section">
+    <span class="section-label reveal">Confirmação</span>
+    <p class="rsvp-intro reveal">
+      Sua presença é fundamental para nós.<br>
+      Confirme abaixo digitando seu <strong>nome e sobrenome.</strong>
+    </p>
+    <div class="rsvp-buttons reveal">
+      <button class="btn-primary" onclick="openModal()">✓ Confirmar Presença</button>
+      <button class="btn-secondary" onclick="openMap()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Ver Localização
+      </button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-names">Luan &amp; Renata</span>
+    <span class="footer-date">13 · Novembro · 2026</span>
+  </footer>
+</div>
+
+<!-- MODAL RSVP -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="rsvp-form-content">
+      <h3>Confirmar Presença</h3>
+      <p>Digite seu nome e sobrenome para localizarmos o seu convite.</p>
+      <div class="field-group">
+        <label>Nome e sobrenome</label>
+        <input type="text" id="guest-name" autocomplete="off" placeholder="Nome e sobrenome">
+      </div>
+      <div style="margin-top: 20px;">
+        <button class="btn-primary" style="width:100%" onclick="submitRSVP()">Confirmar ✓</button>
+      </div>
+      <div class="rsvp-error" id="rsvp-error">
+        <strong>Não encontramos o seu nome na lista.</strong><br>
+        Tente um outro nome e veja se não faltou alguma coisa (como o sobrenome).
+      </div>
+    </div>
+    <div class="rsvp-success" id="rsvp-success">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto">
+        <circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/>
+      </svg>
+      <h3>Presença confirmada!</h3>
+      <p id="success-msg">Que bom ter você conosco.</p>
+      <a class="btn-whatsapp" id="wpp-link" href="#" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.6 6.6 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3A2.8 2.8 0 0 0 6.3 11a4.9 4.9 0 0 0 1 2.6 11 11 0 0 0 4.3 3.8c1.6.6 1.9.5 2.3.5a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.5-.3z"/></svg>
+        Avisar pelo WhatsApp
+      </a>
+      <span class="reset-link" onclick="resetRSVP()">Não é você? Tentar outro nome</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===================== LISTA DE CONVIDADOS =====================
+  // Cole os nomes aqui (um por linha, entre aspas, com vírgula).
+  // O sistema ignora acentos, maiúsculas, ordem e conectores (de, da, do, e).
+  // Enquanto a lista estiver VAZIA, o convite aceita qualquer nome digitado.
+  const CONVIDADOS = [
+    // "Fulano de Tal",
+    // "Beltrana Silva",
+  ];
+
+  // Número de WhatsApp que recebe as confirmações (55 + DDD + número).
+  // *** CONFIRMAR ESTE NÚMERO COM A LUANA ***
+  const WHATSAPP = "5585991574439";
+
+  const bgAudio = document.getElementById('bgAudio');
+  const playBtn = document.getElementById('playBtn');
+
+  // ===================== FLORES DO SPLASH =====================
+  const FLORES = {"gerbera": "<svg viewBox=\"0 0 120 120\" xmlns=\"http://www.w3.org/2000/svg\" class=\"flor-svg\"><g class=\"flor-petalas\"><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(0 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(30 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(60 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(90 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(120 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(150 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(180 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(210 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(240 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(270 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(300 60 60)\"/><ellipse cx=\"60\" cy=\"26\" rx=\"8.5\" ry=\"25\" transform=\"rotate(330 60 60)\"/></g><g class=\"flor-petalas-int\"><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(15 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(45 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(75 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(105 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(135 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(165 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(195 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(225 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(255 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(285 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(315 60 60)\"/><ellipse cx=\"60\" cy=\"40\" rx=\"6\" ry=\"16\" transform=\"rotate(345 60 60)\"/></g><circle cx=\"60\" cy=\"60\" r=\"12.5\" class=\"flor-centro\"/><circle cx=\"60\" cy=\"60\" r=\"6\" class=\"flor-centro-int\"/></svg>", "ramo": "<svg viewBox=\"0 0 140 200\" xmlns=\"http://www.w3.org/2000/svg\" class=\"ramo-svg\"><path d=\"M70 196 C66 150 60 110 70 60 C76 30 70 12 70 6\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><ellipse cx=\"90\" cy=\"170\" rx=\"15\" ry=\"8.5\" transform=\"rotate(-38 90 170)\" fill=\"currentColor\"/><ellipse cx=\"50\" cy=\"150\" rx=\"15\" ry=\"8.5\" transform=\"rotate(40 50 150)\" fill=\"currentColor\"/><ellipse cx=\"88\" cy=\"128\" rx=\"15\" ry=\"8.5\" transform=\"rotate(-42 88 128)\" fill=\"currentColor\"/><ellipse cx=\"50\" cy=\"108\" rx=\"15\" ry=\"8.5\" transform=\"rotate(44 50 108)\" fill=\"currentColor\"/><ellipse cx=\"90\" cy=\"86\" rx=\"15\" ry=\"8.5\" transform=\"rotate(-40 90 86)\" fill=\"currentColor\"/><ellipse cx=\"51\" cy=\"66\" rx=\"15\" ry=\"8.5\" transform=\"rotate(42 51 66)\" fill=\"currentColor\"/><ellipse cx=\"90\" cy=\"46\" rx=\"15\" ry=\"8.5\" transform=\"rotate(-36 90 46)\" fill=\"currentColor\"/><ellipse cx=\"50\" cy=\"28\" rx=\"15\" ry=\"8.5\" transform=\"rotate(38 50 28)\" fill=\"currentColor\"/></svg>", "blossom": "<svg viewBox=\"0 0 100 100\" xmlns=\"http://www.w3.org/2000/svg\" class=\"flor-svg\"><g class=\"flor-petalas\"><ellipse cx=\"50\" cy=\"24\" rx=\"13\" ry=\"20\" transform=\"rotate(0 50 50)\"/><ellipse cx=\"50\" cy=\"24\" rx=\"13\" ry=\"20\" transform=\"rotate(72 50 50)\"/><ellipse cx=\"50\" cy=\"24\" rx=\"13\" ry=\"20\" transform=\"rotate(144 50 50)\"/><ellipse cx=\"50\" cy=\"24\" rx=\"13\" ry=\"20\" transform=\"rotate(216 50 50)\"/><ellipse cx=\"50\" cy=\"24\" rx=\"13\" ry=\"20\" transform=\"rotate(288 50 50)\"/></g><circle cx=\"50\" cy=\"50\" r=\"9\" class=\"flor-centro\"/></svg>"};
+  document.querySelectorAll('[data-flor]').forEach(function(el){
+    var t = el.getAttribute('data-flor');
+    if (FLORES[t]) el.innerHTML = FLORES[t];
+  });
+
+  var aberto = false;
+  function openInvite() {
+    if (aberto) return;
+    aberto = true;
+    // Toca a música DENTRO do gesto de toque (compatível com iOS)
+    try { bgAudio.play().then(function(){ playBtn.classList.add('playing'); }).catch(function(){}); } catch(e) {}
+    var sp = document.getElementById('splash');
+    sp.classList.add('hide');
+    document.getElementById('invite').classList.add('visible');
+    initScrollAnimations();
+    startCountdown();
+    setTimeout(function(){ sp.style.display = 'none'; }, 1150);
+  }
+
+  function toggleMusic() {
+    if (bgAudio.paused) {
+      bgAudio.play().then(function(){ playBtn.classList.add('playing'); }).catch(function(){});
+    } else {
+      bgAudio.pause();
+      playBtn.classList.remove('playing');
+    }
+  }
+  bgAudio.addEventListener('play', function(){ playBtn.classList.add('playing'); });
+  bgAudio.addEventListener('pause', function(){ playBtn.classList.remove('playing'); });
+
+  function startCountdown() {
+    // Data do casamento: 13 de novembro de 2026, 17:00 (mês é base 0 → 10 = novembro)
+    const target = new Date(2026, 10, 13, 17, 0, 0);
+    function update() {
+      const diff = target - new Date();
+      if (diff <= 0) {
+        ['days','hours','minutes','seconds'].forEach(function(id){ document.getElementById(id).textContent = '00'; });
+        return;
+      }
+      document.getElementById('days').textContent = String(Math.floor(diff / 86400000)).padStart(2,'0');
+      document.getElementById('hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2,'0');
+    }
+    update(); setInterval(update, 1000);
+  }
+
+  function initScrollAnimations() {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .timeline-item, .info-card, .venue-card, .countdown-wrap, .message-box, .gift-box').forEach(function(el) { observer.observe(el); });
+  }
+
+  function openModal() { document.getElementById('modal').classList.add('open'); setTimeout(function(){ document.getElementById('guest-name').focus(); }, 350); }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); }
+  function closeModalOutside(e) { if (e.target === document.getElementById('modal')) closeModal(); }
+
+  // ---------- Reconhecimento de nome ----------
+  const CONECTORES = { 'de':1,'da':1,'do':1,'dos':1,'das':1,'e':1 };
+  function normalizar(s) {
+    return (s||'').toLowerCase()
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+      .replace(/[^a-z\s]/g,' ')
+      .trim().replace(/\s+/g,' ');
+  }
+  function tokens(s) {
+    return normalizar(s).split(' ').filter(function(t){ return t && !CONECTORES[t]; });
+  }
+  function tituloCase(s) {
+    return (s||'').trim().replace(/\s+/g,' ').split(' ').map(function(p){
+      return p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
+    }).join(' ');
+  }
+  function encontrar(input) {
+    const tIn = tokens(input);
+    if (tIn.length < 1) return null;
+    // Sem lista de convidados ainda: aceita qualquer nome digitado.
+    if (CONVIDADOS.length === 0) return input;
+    for (let i=0; i<CONVIDADOS.length; i++) {
+      const tG = tokens(CONVIDADOS[i]);
+      const setG = {}; tG.forEach(function(t){ setG[t]=1; });
+      const setIn = {}; tIn.forEach(function(t){ setIn[t]=1; });
+      const inDentroG = tIn.every(function(t){ return setG[t]; });
+      const gDentroIn = tG.every(function(t){ return setIn[t]; });
+      if (inDentroG || gDentroIn) return CONVIDADOS[i];
+    }
+    return null;
+  }
+
+  function submitRSVP() {
+    const valor = document.getElementById('guest-name').value;
+    const erro = document.getElementById('rsvp-error');
+    if (encontrar(valor)) {
+      const nome = tituloCase(valor);
+      const msg = 'Ola! Aqui e ' + nome + ' e confirmo minha presenca no casamento de Luan & Renata, no dia 13/11/2026. Que alegria poder celebrar esse dia com voces!';
+      document.getElementById('wpp-link').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+      document.getElementById('success-msg').textContent = 'Que bom ter você conosco, ' + nome.split(' ')[0] + '.';
+      document.getElementById('rsvp-form-content').style.display = 'none';
+      document.getElementById('rsvp-success').style.display = 'block';
+    } else {
+      erro.style.display = 'block';
+      document.getElementById('guest-name').focus();
+    }
+  }
+  function resetRSVP() {
+    document.getElementById('guest-name').value = '';
+    document.getElementById('rsvp-error').style.display = 'none';
+    document.getElementById('rsvp-success').style.display = 'none';
+    document.getElementById('rsvp-form-content').style.display = 'block';
+    document.getElementById('guest-name').focus();
+  }
+
+  function openMap() {
+    window.open('https://www.google.com/maps/search/?api=1&query=Capela+Santa+Edwiges+Rua+Cabral+Veras+494+Maraponga+Fortaleza+CE', '_blank');
+  }
+</script>
+</body>
+</html>
