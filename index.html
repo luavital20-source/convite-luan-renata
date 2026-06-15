@@ -407,68 +407,6 @@
   }
   .btn-secondary:hover { border-color: var(--text); color: var(--text); }
 
-  /* MODAL */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(4px); z-index: 200;
-    display: flex; align-items: center; justify-content: center; padding: 24px;
-    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-  }
-  .modal-overlay.open { opacity: 1; pointer-events: all; }
-  .modal {
-    background: var(--cream); max-width: 420px; width: 100%; padding: 48px 36px;
-    position: relative; transform: translateY(20px); transition: transform 0.3s ease;
-    border: 1.5px solid var(--gold-light);
-  }
-  .modal-overlay.open .modal { transform: translateY(0); }
-  .modal-close {
-    position: absolute; top: 16px; right: 16px; background: none; border: none;
-    font-size: 18px; color: var(--text-light); cursor: pointer; font-weight: 600;
-  }
-  .modal h3 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 28px; font-style: italic; font-weight: 400; color: var(--text); margin-bottom: 8px;
-  }
-  .modal p { font-size: 15px; color: var(--text-light); margin-bottom: 28px; line-height: 1.6; }
-  .field-group { margin-bottom: 16px; text-align: left; }
-  .field-group label {
-    font-family: 'Cinzel', Georgia, serif; font-size: 9px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--navy); display: block; margin-bottom: 6px; font-weight: 500;
-  }
-  .field-group input {
-    width: 100%; border: 1.5px solid var(--gold-light); padding: 12px 14px;
-    font-family: 'EB Garamond', Georgia, serif; font-size: 16px;
-    color: var(--text); background: white; outline: none; transition: border-color 0.2s; text-align: center;
-  }
-  .field-group input:focus { border-color: var(--navy); }
-
-  .rsvp-error {
-    display: none; margin-top: 18px; padding: 14px 16px;
-    background: rgba(22,36,63,0.08); border: 1px solid rgba(22,36,63,0.30);
-    font-family: 'EB Garamond', Georgia, serif; font-size: 15px; color: var(--navy); line-height: 1.5;
-  }
-  .rsvp-error strong { font-weight: 600; }
-
-  .rsvp-success { display: none; text-align: center; padding: 8px 0; }
-  .rsvp-success h3 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 26px; font-style: italic; color: var(--navy); margin: 12px 0 6px;
-  }
-  .rsvp-success p { color: var(--text-light); margin-bottom: 22px; }
-  .btn-whatsapp {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
-    background: var(--navy); color: white; text-decoration: none;
-    font-family: 'Cinzel', Georgia, serif; font-size: 11px;
-    letter-spacing: 3px; text-transform: uppercase; padding: 16px 20px;
-    transition: all 0.3s ease;
-  }
-  .btn-whatsapp:hover { background: var(--text); }
-  .reset-link {
-    display: inline-block; margin-top: 18px; cursor: pointer;
-    font-family: 'Cinzel', Georgia, serif; font-size: 9px; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--text-light); border-bottom: 1px solid var(--gold-light); padding-bottom: 3px;
-  }
-
   /* FOOTER */
   footer { text-align: center; padding: 40px 24px; border-top: 1.5px solid var(--gold-light); }
   footer .footer-names {
@@ -726,10 +664,13 @@
     <span class="section-label reveal">Confirmação</span>
     <p class="rsvp-intro reveal">
       Sua presença é fundamental para nós.<br>
-      Confirme abaixo digitando seu <strong>nome e sobrenome.</strong>
+      Toque no botão abaixo para <strong>confirmar pelo WhatsApp.</strong>
     </p>
     <div class="rsvp-buttons reveal">
-      <button class="btn-primary" onclick="openModal()">✓ Confirmar Presença</button>
+      <button class="btn-primary" onclick="confirmarPresenca()" style="display:inline-flex;align-items:center;gap:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.6 6.6 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3A2.8 2.8 0 0 0 6.3 11a4.9 4.9 0 0 0 1 2.6 11 11 0 0 0 4.3 3.8c1.6.6 1.9.5 2.3.5a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.5-.3z"/></svg>
+        Confirmar Presença
+      </button>
       <button class="btn-secondary" onclick="openMap()">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
         Ver Localização
@@ -743,52 +684,8 @@
   </footer>
 </div>
 
-<!-- MODAL RSVP -->
-<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="rsvp-form-content">
-      <h3>Confirmar Presença</h3>
-      <p>Digite seu nome e sobrenome para localizarmos o seu convite.</p>
-      <div class="field-group">
-        <label>Nome e sobrenome</label>
-        <input type="text" id="guest-name" autocomplete="off" placeholder="Nome e sobrenome">
-      </div>
-      <div style="margin-top: 20px;">
-        <button class="btn-primary" style="width:100%" onclick="submitRSVP()">Confirmar ✓</button>
-      </div>
-      <div class="rsvp-error" id="rsvp-error">
-        <strong>Não encontramos o seu nome na lista.</strong><br>
-        Tente um outro nome e veja se não faltou alguma coisa (como o sobrenome).
-      </div>
-    </div>
-    <div class="rsvp-success" id="rsvp-success">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#16243F" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto">
-        <circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/>
-      </svg>
-      <h3>Presença confirmada!</h3>
-      <p id="success-msg">Que bom ter você conosco.</p>
-      <a class="btn-whatsapp" id="wpp-link" href="#" target="_blank" rel="noopener">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.9.9-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.6 6.6 0 0 1-3.2-2.8c-.2-.4.2-.4.6-1.2.1-.2 0-.3 0-.5l-.7-1.7c-.2-.5-.4-.4-.5-.4h-.5a1 1 0 0 0-.7.3A2.8 2.8 0 0 0 6.3 11a4.9 4.9 0 0 0 1 2.6 11 11 0 0 0 4.3 3.8c1.6.6 1.9.5 2.3.5a2.4 2.4 0 0 0 1.6-1.1 2 2 0 0 0 .1-1.1c0-.1-.2-.2-.5-.3z"/></svg>
-        Avisar pelo WhatsApp
-      </a>
-      <span class="reset-link" onclick="resetRSVP()">Não é você? Tentar outro nome</span>
-    </div>
-  </div>
-</div>
-
 <script>
-  // ===================== LISTA DE CONVIDADOS =====================
-  // Cole os nomes aqui (um por linha, entre aspas, com vírgula).
-  // O sistema ignora acentos, maiúsculas, ordem e conectores (de, da, do, e).
-  // Enquanto a lista estiver VAZIA, o convite aceita qualquer nome digitado.
-  const CONVIDADOS = [
-    // "Fulano de Tal",
-    // "Beltrana Silva",
-  ];
-
   // Número de WhatsApp que recebe as confirmações (55 + DDD + número).
-  // *** CONFIRMAR ESTE NÚMERO COM A LUANA ***
   const WHATSAPP = "5585991574439";
 
   const bgAudio = document.getElementById('bgAudio');
@@ -850,63 +747,9 @@
     document.querySelectorAll('.reveal, .timeline-item, .info-card, .venue-card, .countdown-wrap, .message-box, .gift-box').forEach(function(el) { observer.observe(el); });
   }
 
-  function openModal() { document.getElementById('modal').classList.add('open'); setTimeout(function(){ document.getElementById('guest-name').focus(); }, 350); }
-  function closeModal() { document.getElementById('modal').classList.remove('open'); }
-  function closeModalOutside(e) { if (e.target === document.getElementById('modal')) closeModal(); }
-
-  // ---------- Reconhecimento de nome ----------
-  const CONECTORES = { 'de':1,'da':1,'do':1,'dos':1,'das':1,'e':1 };
-  function normalizar(s) {
-    return (s||'').toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-      .replace(/[^a-z\s]/g,' ')
-      .trim().replace(/\s+/g,' ');
-  }
-  function tokens(s) {
-    return normalizar(s).split(' ').filter(function(t){ return t && !CONECTORES[t]; });
-  }
-  function tituloCase(s) {
-    return (s||'').trim().replace(/\s+/g,' ').split(' ').map(function(p){
-      return p.charAt(0).toUpperCase() + p.slice(1).toLowerCase();
-    }).join(' ');
-  }
-  function encontrar(input) {
-    const tIn = tokens(input);
-    if (tIn.length < 1) return null;
-    // Sem lista de convidados ainda: aceita qualquer nome digitado.
-    if (CONVIDADOS.length === 0) return input;
-    for (let i=0; i<CONVIDADOS.length; i++) {
-      const tG = tokens(CONVIDADOS[i]);
-      const setG = {}; tG.forEach(function(t){ setG[t]=1; });
-      const setIn = {}; tIn.forEach(function(t){ setIn[t]=1; });
-      const inDentroG = tIn.every(function(t){ return setG[t]; });
-      const gDentroIn = tG.every(function(t){ return setIn[t]; });
-      if (inDentroG || gDentroIn) return CONVIDADOS[i];
-    }
-    return null;
-  }
-
-  function submitRSVP() {
-    const valor = document.getElementById('guest-name').value;
-    const erro = document.getElementById('rsvp-error');
-    if (encontrar(valor)) {
-      const nome = tituloCase(valor);
-      const msg = 'Ola! Aqui e ' + nome + ' e confirmo minha presenca no casamento de Luan & Renata, no dia 13/11/2026. Que alegria poder celebrar esse dia com voces!';
-      document.getElementById('wpp-link').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
-      document.getElementById('success-msg').textContent = 'Que bom ter você conosco, ' + nome.split(' ')[0] + '.';
-      document.getElementById('rsvp-form-content').style.display = 'none';
-      document.getElementById('rsvp-success').style.display = 'block';
-    } else {
-      erro.style.display = 'block';
-      document.getElementById('guest-name').focus();
-    }
-  }
-  function resetRSVP() {
-    document.getElementById('guest-name').value = '';
-    document.getElementById('rsvp-error').style.display = 'none';
-    document.getElementById('rsvp-success').style.display = 'none';
-    document.getElementById('rsvp-form-content').style.display = 'block';
-    document.getElementById('guest-name').focus();
+  function confirmarPresenca() {
+    const msg = 'Olá! Gostaria de confirmar minha presença no casamento de Luan & Renata, no dia 13/11/2026. Que alegria poder celebrar esse dia com vocês!';
+    window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg), '_blank');
   }
 
   function openMap() {
